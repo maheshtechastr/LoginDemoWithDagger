@@ -19,8 +19,6 @@ package com.dagger
 import android.app.Application
 import com.dagger.di.AppComponent
 import com.dagger.di.DaggerAppComponent
-import com.dagger.storage.SharedPreferencesStorage
-import com.dagger.user.UserManager
 
 open class MyApplication : Application() {
 
@@ -31,7 +29,4 @@ open class MyApplication : Application() {
         DaggerAppComponent.factory().create(applicationContext)
     }
 
-    open val userManager by lazy {
-        UserManager(SharedPreferencesStorage(this))
-    }
 }

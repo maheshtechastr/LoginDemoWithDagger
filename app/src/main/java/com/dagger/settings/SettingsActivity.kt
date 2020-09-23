@@ -21,20 +21,20 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.dagger.MyApplication
-import com.example.android.dagger.R
 import com.dagger.login.LoginActivity
+import com.example.android.dagger.R
+import javax.inject.Inject
 
 class SettingsActivity : AppCompatActivity() {
-
-    private lateinit var settingsViewModel: SettingsViewModel
+    @Inject
+    lateinit var settingsViewModel: SettingsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        var userManager = (application as MyApplication).appComponent.userManager()
+        userManager.userComponent!!.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
-        val userManager = (application as MyApplication).userManager
-
-        settingsViewModel = SettingsViewModel(userManager.userDataRepository!!, userManager)
         setupViews()
     }
 
